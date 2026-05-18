@@ -6,8 +6,10 @@ description: "Our Idea"
 slug: "phase1post"
 tags: ["project", "Setup"]
 authors:
-  - "eric_gerber"
-  - "mark_fontenot"
+  - "rishi_ponnapalli"
+  - "alyssa_diwale"
+  - "mihika_mehta"
+  - "manav_mahida"
 showAuthorsBadges: false
 ---
 
