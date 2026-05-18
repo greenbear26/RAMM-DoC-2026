@@ -20,21 +20,27 @@
   weight = 20
 
 [[main]]
-  name = "Eric Gerber"
+  name = "Rishi Ponnapalli"
   parent = "Team Members"
-  pageRef = "EricGerber"
+  pageRef = "RishiPonnapalli"
   weight = 20
 
 [[main]]
-  name = "Mark Fontenot"
+  name = "Alyssa Diwale"
   parent = "Team Members"
-  pageRef = "MarkFontenot"
+  pageRef = "AlyssaDiwale"
   weight = 20
 
 [[main]]
-  name = "A New Guy"
+  name = "Manav Mahida"
   parent = "Team Members"
-  pageRef = "ANewGuy"
+  pageRef = "ManavMihida"
+  weight = 20
+
+[[main]]
+  name = "Mihika Mehta"
+  parent = "Team Members"
+  pageRef = "MihikaMehta"
   weight = 20
 
 #[[main]]
@@ -56,17 +62,6 @@
 #  name = "example sub-menu 2"
 #  parent = "Parent"
 #  pageRef = "posts"
-#  weight = 20
-
-#[[subnavigation]]
-#  name = "An interesting topic"
-#  pageRef = "tags/interesting-topic"
-#  weight = 10
-
-#[[subnavigation]]
-#  name = "My Awesome Category"
-#  pre = "github"
-#  pageRef = "categories/awesome"
 #  weight = 20
 
 #[[main]]

@@ -1,15 +1,18 @@
 ---
 title: "Project - Phase I"
-date: 2024-05-11
+date: 2026-05-18
 draft: false
-description: "Our Idea"
+description: "Our Idea for the project"
 tags: ["authors", "config", "docs"]
 slug: "index"
 authors:
-  - "eric_gerber"
+  - "rishi_ponnapalli"
+  - "alyssa_diwale"
+  - "mihika_mehta"
+  - "manav_mahida"
 showAuthorsBadges : false
 ---
 
-# Welcome to Team WeCanDoThis!
+# Welcome to Team RAMM!
 
 Welcome to the Professorial Team's Blog
