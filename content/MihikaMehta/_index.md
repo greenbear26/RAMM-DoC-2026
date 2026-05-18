@@ -2,4 +2,4 @@
 title: "Mihika Mehta"
 ---
 
-WRITE YOUR DESCRIPTION HERE
+Hello! I am a rising second year studying CS and Law! 
