@@ -11,5 +11,6 @@ Here is my [GitHub](https://github.com/greenbear26). Some of my featured project
 
 In addition to coding and robotics, some of my other interests include playing chess; watching sports like football, baseball, and cricket; and playing the clarinet.
 
-![Me in Namur](/rishiponnapalli/me.JPG)
+<img src="me.JPG" alt="Mousse on First Day" style="transform: rotate(0deg); display: block; max-width: 100%;" />
+
 *Me In Namur*
