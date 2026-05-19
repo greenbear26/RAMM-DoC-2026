@@ -15,10 +15,10 @@ In this phase, my contributions included setting up the repository for the entir
 
 This first week in Belgium has been cool. Seeing the culture in Leuven and Brussels has been a new experience, and I am glad to be here. I have also learned a lot about how the EU works theough the talks we've had, and best of all, I have had some great food!
 
-![Mousse on First Day](/rishiponnapalli/first_mousse.JPG)
+<img src="first_mousse.JPG" alt="Mousse on First Day" style="transform: rotate(0deg); display: block; max-width: 100%;" />
 
-![Liege Waffle](/rishiponnapalli/liege_waffle.JPG)
+<img src="liege_waffle.JPG" alt="Liege Waffle" style="transform: rotate(0deg); display: block; max-width: 100%;" />
 
-![Neuhaus Mousse](/rishiponnapalli/neuhaus_mousse.JPG)
+<img src="neuhaus_mousse.JPG" alt="Mousse from Neuhaus" style="transform: rotate(0deg); display: block; max-width: 100%;" />
 
 *Some of the food I have eaten here*
