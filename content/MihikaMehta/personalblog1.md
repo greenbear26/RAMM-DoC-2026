@@ -13,8 +13,8 @@ showAuthorsBadges : true
 
 <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/3wWxDvGY6t0C0pTOJUCcsr" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
 
-<img src="IMG_0068.JPG" alt="Mousse on First Day" style="transform: rotate(0deg); display: block; max-width: 100%;" />
-
+![Grand Place Brussels](../../assets/brussels.jpg)
+*A night out at the Grand Place in Brussels!*
 
 
 # Personal Blog :) 
