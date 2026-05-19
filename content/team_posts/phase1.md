@@ -49,7 +49,20 @@ User stories
 
 4. As a poly-sci researcher, I want an ML-generated prediction of which lobbyists are most likely to be influential, so that I can prioritize my case studies on organizations who are most likely shaping actual policy outcomes.
 
+## Stromae:
+Bio: A 19 year old, a first-year university student in Leuven who just voted in his first European election. He follows politics loosely through TikTok and Instagram and is curious about how the EU actually works, but the institutional websites feel impenetrable and dry. He has a short attention span for dense text but loves visual explainers and "wait, what?" moments that he can screenshot and send to his group chat. He's not looking for a research tool; he wants to learn enough to feel informed and form opinions.
 
+
+User stories
+1. As a curious newcomer, I want a one-screen explanation of what the European Parliament does and who can access it, so that I can build a basic mental model without reading a textbook.
+
+2. As a curious newcomer, I want to see an influence score visualized as a simple chart or ranking, so that I can grasp who matters without interpreting raw numbers.
+
+3. As a curious newcomer, I want short, plain-language definitions when I hover over or tap on jargon, so that I don't feel lost or stupid while exploring.
+
+4. As a curious newcomer, I want to screenshot a clean visual and share it on my Instagram story, so that I can show friends what I learned without writing a caption.
+
+5. As a curious newcomer, I want a "did you know?" or "surprising fact" section, so that I can discover interesting things without knowing what to search for.
 
 
 
