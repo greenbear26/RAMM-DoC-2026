@@ -17,7 +17,7 @@ showAuthorsBadges: false
 
 Understanding who influences EU policy, and how much they spend doing it, is really hard to figure out. Lobbying data is technically available to the public, but it’s scattered, confusing, and pretty inaccessible for most people. We are building a web application to address the lack of lobbying transparency by letting users search any policy area and immediately see which organizations are lobbying on it, how much money they are spending, where they’re from, and what industry they represent. 
 
-To make the analysis more meaningful, we’re combining lobbying data from LobbyFacts.eu with World Bank API data from https://datahelpdesk.worldbank.org/knowledgebase/topics/125589, including GDP, population, and government transparency scores, to add economic and political context to the lobbying patterns we’re uncovering. 
+To make the analysis more meaningful, we’re combining lobbying data from [LobbyFacts.eu](https://www.lobbyfacts.eu/) with World Bank API data from https://datahelpdesk.worldbank.org/knowledgebase/topics/125589, including GDP(https://api.worldbank.org/v2/country/all/indicator/NY.GDP.MKTP.CD?format=json&per_page=300&mrv=1 ), population(https://api.worldbank.org/v2/country/all/indicator/SP.POP.TOTL?format=json&per_page=300&mrv=1 ), and government transparency scores, to add economic and political context to the lobbying patterns we’re uncovering. 
 
 Our app is designed for three types of users: investigative journalists following the money, political science researchers looking for patterns, and everyday citizens who just want to understand who is shaping the policies that affect them.
 
