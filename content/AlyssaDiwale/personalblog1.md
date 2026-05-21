@@ -16,5 +16,4 @@ This dialogue has already taught me so much about the intersection of data scien
 
 For the Phase 1 Deliverable, I helped back up our topic by helping research data sets and understanding the personas that are relevant to our topic. I also helped write personas for our deliverable.
 
-![My photo](/IMG_8028.jpg)
-
+<img src="IMG_8028.jpg" alt="Brussles" style="transform: rotate(0deg); display: block; max-width: 100%;" />
