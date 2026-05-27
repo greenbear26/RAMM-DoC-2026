@@ -13,6 +13,8 @@ authors:
 showAuthorsBadges: false
 ---
 
+# Blog Post 2
+
 ## Data Curation and Cleaning
 
 Our final dataset merges two sources. The first is LobbyFacts, which contains 16,862 registered EU lobbying organizations with fields including lobbying cost, EP meeting counts, EP access passes, number of staff, country of headquarters, and whether the org lobbies for itself or on behalf of clients. The second is the World Bank API, from which we pulled GDP, population, and inflation rate for every country in the world.
@@ -64,3 +66,183 @@ We trained on 7,176 organizations that have recorded meeting data, using an 80/2
 ### Results
 
 Our model achieved an R² score of 0.41 and an RMSE of approximately 20 meetings. The R² score means the model explains 41% of the variance in meeting counts. 0.41 isn't the most ideal score so for Phase III we plan to look for more datasets, particularly ones that include the specific policy areas each organization lobbies on and also explore more sophisticated modeling approach that could better capture these non-linear relationships and improve predictive accuracy for our users.
+
+## ER Diagram
+
+Tintin ER Diagram:
+<img src="erdiagram_tintin.png" style="transform: rotate(0deg); display: block; max-width: 100%;" />
+
+Clousaeu ER Diagram:
+<img src="erdiagram_clousaeu.png" style="transform: rotate(0deg); display: block; max-width: 100%;" />
+
+Stromae ER Diagram:
+<img src="erdiagram_stromae.png" style="transform: rotate(0deg); display: block; max-width: 100%;" />
+
+
+Global ER Diagram:
+<img src="erglobal.png" style="transform: rotate(0deg); display: block; max-width: 100%;" />
+
+## Relational Models
+
+Tintin Relational Model:
+<img src="tintinrelational.png" style="transform: rotate(0deg); display: block; max-width: 100%;" />
+
+Clousaeu Relational Model:
+<img src="clouseaurelational.png" style="transform: rotate(0deg); display: block; max-width: 100%;" />
+
+Stromae Relational Model:
+<img src="stromaerelational.png" style="transform: rotate(0deg); display: block; max-width: 100%;" />
+
+Global Relational Model:
+<img src="globalrelational.png" style="transform: rotate(0deg); display: block; max-width: 100%;" />
+
+
+## Wireframes
+
+Main Page:
+<img src="wireframe_main.png" style="transform: rotate(0deg); display: block; max-width: 100%;" />
+
+Tintin:
+<img src="tintinwireframe_1.png" style="transform: rotate(0deg); display: block; max-width: 100%;" />
+
+<img src="tintinwireframe_2.png" style="transform: rotate(0deg); display: block; max-width: 100%;" />
+
+Clouseau Page:
+<img src="clouseauwireframe_1.png" style="transform: rotate(0deg); display: block; max-width: 100%;" />
+
+<img src="clouseauwireframe_2.png" style="transform: rotate(0deg); display: block; max-width: 100%;" />
+
+Stromae Page:
+<img src="stromaewireframe_1.png" style="transform: rotate(0deg); display: block; max-width: 100%;" />
+
+<img src="stromaewireframe_2.png" style="transform: rotate(0deg); display: block; max-width: 100%;" />
+
+## DDL for Global Data Model
+
+<details>
+<summary>View full code</summary>
+CREATE TABLE country (
+country_code VARCHAR(10) PRIMARY KEY,
+name VARCHAR(100) NOT NULL,
+region VARCHAR(100),
+income_group VARCHAR(100)
+);
+
+CREATE TABLE country_indicator (
+indicator_id INTEGER PRIMARY KEY,
+country_code VARCHAR(10) NOT NULL,
+year INTEGER NOT NULL,
+gdp_usd FLOAT,
+population INTEGER,
+inflation_rate FLOAT,
+source VARCHAR(255),
+FOREIGN KEY (country_code) REFERENCES country(country_code)
+);
+
+CREATE TABLE industry (
+industry_id INTEGER PRIMARY KEY,
+name VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE policy_area (
+policy_area_id INTEGER PRIMARY KEY,
+name VARCHAR(100) NOT NULL,
+description VARCHAR(10000),
+tags VARCHAR(255)
+);
+
+CREATE TABLE organization (
+org_id INTEGER PRIMARY KEY,
+name VARCHAR(255) NOT NULL,
+lobbyfacts_url VARCHAR(500),
+members_eu INTEGER,
+lobbying_cost FLOAT,
+interest_represented VARCHAR(255),
+country_code VARCHAR(10),
+industry_id INTEGER,
+FOREIGN KEY (country_code) REFERENCES country(country_code),
+FOREIGN KEY (industry_id) REFERENCES industry(industry_id)
+);
+
+CREATE TABLE lobbying_activity (
+activity_id INTEGER PRIMARY KEY,
+org_id INTEGER NOT NULL,
+policy_area_id INTEGER NOT NULL,
+eu_institution VARCHAR(255),
+activity_type VARCHAR(100),
+description VARCHAR(10000),
+source VARCHAR(255),
+start_date DATE,
+end_date DATE,
+FOREIGN KEY (org_id) REFERENCES organization(org_id),
+FOREIGN KEY (policy_area_id) REFERENCES policy_area(policy_area_id)
+);
+
+CREATE TABLE expenditure_record (
+expenditure_id INTEGER PRIMARY KEY,
+org_id INTEGER NOT NULL,
+policy_area_id INTEGER,
+year INTEGER NOT NULL,
+amount_eur FLOAT,
+amount_range_min_eur FLOAT,
+amount_range_max_eur FLOAT,
+currency VARCHAR(20),
+source VARCHAR(255),
+FOREIGN KEY (org_id) REFERENCES organization(org_id),
+FOREIGN KEY (policy_area_id) REFERENCES policy_area(policy_area_id)
+);
+
+CREATE TABLE meeting (
+meeting_id INTEGER PRIMARY KEY,
+org_id INTEGER NOT NULL,
+eu_body VARCHAR(255),
+meeting_date DATE,
+subject VARCHAR(10000),
+attendees_count INTEGER,
+source VARCHAR(255),
+FOREIGN KEY (org_id) REFERENCES organization(org_id)
+);
+
+CREATE TABLE access_pass (
+pass_id INTEGER PRIMARY KEY,
+org_id INTEGER NOT NULL,
+person_name VARCHAR(255),
+role_title VARCHAR(255),
+eu_body VARCHAR(255),
+issue_date DATE,
+expiry_date DATE,
+source VARCHAR(255),
+FOREIGN KEY (org_id) REFERENCES organization(org_id)
+);
+
+CREATE TABLE influence_prediction (
+prediction_id INTEGER PRIMARY KEY,
+org_id INTEGER NOT NULL,
+policy_area_id INTEGER,
+model_version VARCHAR(100),
+run_date DATE,
+influence_score FLOAT,
+influence_class VARCHAR(100),
+top_features_json VARCHAR(10000),
+FOREIGN KEY (org_id) REFERENCES organization(org_id),
+FOREIGN KEY (policy_area_id) REFERENCES policy_area(policy_area_id)
+);
+
+CREATE TABLE app_user (
+user_id INTEGER PRIMARY KEY,
+role VARCHAR(100),
+email VARCHAR(255) NOT NULL,
+created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE saved_query_export (
+export_id INTEGER PRIMARY KEY,
+user_id INTEGER NOT NULL,
+query_json VARCHAR(10000),
+created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+file_format VARCHAR(50),
+FOREIGN KEY (user_id) REFERENCES app_user(user_id)
+);
+
+
+</details>
