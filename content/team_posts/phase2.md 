@@ -1,0 +1,55 @@
+title: "Project – Phase II"
+date: 2026-05-27
+draft: false
+description: "Real data, ML models, EDA visualizations, and data architecture"
+slug: "phase2post"
+tags: ["project", "data", "ML"]
+authors:
+  - "rishi_ponnapalli"
+  - "alyssa_diwale"
+  - "mihika_mehta"
+  - "manav_mahida"
+showAuthorsBadges: false
+---
+
+
+
+
+
+## Data Curation and Cleaning
+
+Our final dataset merges two sources. The first is LobbyFacts, which contains 16,862 registered EU lobbying organizations with fields including lobbying cost, EP meeting counts, EP access passes, number of staff, country of headquarters, and whether the org lobbies for itself or on behalf of clients. The second is the World Bank API, from which we pulled GDP, population, and inflation rate for every country in the world.
+
+We joined the two datasets on country name, achieving a 97.9% match rate. Before merging we cleaned the LobbyFacts data by standardizing country names from ALL CAPS to Title Case, filling missing meeting and pass counts with 0 (since absence of recorded data means no documented access, not bad data), and removing the 5,333 organizations that had zero lobbying cost recorded since these provide no useful financial signal. Our final working dataset contained 11,529 organizations.
+
+## Exploratory Data Analysis
+
+### EDA Plot 1 — Distribution of Lobbying Spend
+
+Our first visualization looked at how lobbying expenditure is distributed across all organizations. We plotted it two ways: raw and log-transformed.
+
+The raw distribution is extremely right-skewed. The vast majority of organizations spend under €50,000 on lobbying while a small handful spend millions — Meta spends €10M, Fleishman-Hillard spends €12.7M. On a normal scale, these outliers make every other organization invisible.
+
+This finding matters for two reasons. First, it confirms the core story of our app: lobbying power is not evenly distributed. A tiny number of well-funded organizations dominate access to EU institutions. Second, it tells us technically that we need to use log scale when displaying spending data in the app, and that we need to log-transform the lobbying cost feature before feeding it into our ML model so that extreme values don't distort the predictions.
+
+### EDA Plot 2 — Lobbying Spend vs EP Meetings
+
+Our second visualization asked the most important question for our entire project: does spending more money actually get you more meetings with Parliament?
+
+The answer is yes and we proved it with the EDA. We found a correlation of 0.565 between lobbying cost and meeting count. That is a moderately strong positive relationship, meaning organizations that spend more do tend to secure more documented parliamentary access. This is not just an interesting finding — it is the empirical foundation for our ML model. If spending predicted nothing, our model would have no basis. The fact that it correlates at 0.565 tells us spending is a meaningful signal worth training on.
+
+## Machine Learning — Predicting Parliamentary Influence
+
+### Why We Predict Meetings
+
+57% of organizations in our dataset,9,686 orgs, have no recorded meeting data. Without predictions, we cannot rank or score these organizations at all, which means our app can only meaningfully serve users for less than half the dataset. The ML model solves this by learning patterns from the 43% of orgs that do have meeting data and applying those patterns to predict meetings for the rest.
+
+### Model — Linear Regression
+
+For our Phase II proof-of-concept we implemented a Linear Regression model. We chose Linear Regression because it is interpretable, we can directly see how much each feature contributes to the prediction.
+
+We trained on 7,176 organizations that have recorded meeting data, using an 80/20 train/test split — meaning 5,664 organizations were used to train the model and 1,417 were held out to test how accurately it predicts on data it has never seen. The features we fed the model were lobbying cost, EP access passes, interest type (whether the org lobbies for itself or on behalf of clients), and the lobbying-to-GDP ratio from our World Bank merge.
+
+### Results
+
+Our model achieved an R² score of 0.41 and an RMSE of approximately 20 meetings. The R² score means the model explains 41% of the variance in meeting counts. 0.41 isn't the most ideal score so for Phase III we plan to look for more datasets, particularly ones that include the specific policy areas each organization lobbies on and also explore more sophisticated modeling approach that could better capture these non-linear relationships and improve predictive accuracy for our users.
