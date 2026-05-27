@@ -15,4 +15,4 @@ showAuthorsBadges : false
 
 # Welcome to Team RAMM!
 
-Welcome to the Professorial Team's Blog
+Welcome to tLobbyLens!
