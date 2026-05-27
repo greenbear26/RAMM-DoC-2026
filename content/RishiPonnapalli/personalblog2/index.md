@@ -3,7 +3,7 @@ title: "Personal Blog 2"
 date: 2026-05-27
 draft: false
 description: "Blog for phase 2 of the project"
-slug: "blog1"
+slug: "blog2"
 tags: ["authors", "config", "docs"]
 authors:
   - "rishi_ponnapalli"
