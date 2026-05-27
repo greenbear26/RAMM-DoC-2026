@@ -119,8 +119,7 @@ Stromae Page:
 
 ## DDL for Global Data Model
 
-<details>
-<summary>View full code</summary>
+```
 CREATE TABLE country (
 country_code VARCHAR(10) PRIMARY KEY,
 name VARCHAR(100) NOT NULL,
@@ -243,6 +242,5 @@ created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 file_format VARCHAR(50),
 FOREIGN KEY (user_id) REFERENCES app_user(user_id)
 );
+```
 
-
-</details>
