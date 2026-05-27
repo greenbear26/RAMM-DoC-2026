@@ -1,23 +1,30 @@
 ---
-title: "Personal Blog 1"
-date: 2026-05-18
+title: "Phase II – Individual Reflection"
+date: 2026-05-27
 draft: false
-description: "Blog for assignment 1 of the project"
-slug: "blog1"
-tags: ["authors", "config", "docs"]
+description: "My contributions to Phase II of the RAMM lobbying transparency project"
 authors:
   - "mihika_mehta"
-showAuthorsBadges : true
 ---
-# My Playlist
 
-<iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/3wWxDvGY6t0C0pTOJUCcsr" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+### Data Cleaning and Merging
+
+For the Data Cleaning and Merging I helped clean the LobbyFacts dataset and merging it with the World Bank API data. This involved standardizing country names from ALL CAPS to Title Case so they could match World Bank records, filling missing meetings and EP pass counts with 0, and removing organizations with no recorded lobbying spend. After cleaning we went from 16,862 organizations down to 11,529 usable records. 
 
 
+### Exploratory Data Analysis
 
-# Personal Blog :) 
-One of the most interesting things I’ve learned so far in this Dialogue is how the EU's Digital Services Act is handling child protection online. What stuck out to me the most was how something as simple as age verification is genuinely unsolved, self declaration doesn’t work because anyone can lie, but verifying age properly raises serious privacy concerns. It's fascinating to see the EU trying to balance freedom of speech with protecting children online. 
+I built both EDA visualizations for the team blog post. The first plot showed the distribution of lobbying expenditure — which turned out to be extremely right-skewed, with most organizations spending under €50K while a handful spend millions. This was actually a really important finding because it told us we needed to log-transform the data for both visualization and ML purposes.
 
-For the Phase 1 deliverable, I came up with the core idea behind our project idea about lobbying and also conducted research to support the idea. I coordinated one potential data source that the team could use and helped write the project description as well.
+The second plot was my personal favorite. It was a scatter plot of lobbying spend vs EP meetings that showed a correlation of 0.565. That number basically proved the core premise of our entire app which was that money does buy parliamentary access. Seeing that come out of real data was actually an exciting moment.  
 
-On a personal note, I'm absolutely loving my time in Belgium! Trying Belgian waffles has been a highlight, and exploring Leuven during my free time has been such a wonderful experience.
+
+### ML Model
+
+I contributed to training the Linear Regression model that predicts EP meeting counts for organizations with no recorded data. We used an 80/20 train/test split and achieved an R² of 0.41. While there's definitely room to improve, Linear Regression can't capture the non-linear complexity of lobbying behavior, it's a solid proof of concept for Phase II and gives us a clear direction for Phase III.
+
+The biggest difficulty was that 57% of our organizations had no meeting data at all. This meant our training set was smaller than ideal and the model had to generalize a lot. For Phase III I'd like to explore whether adding policy area data could help the model make better predictions by giving it more context about what each org is actually lobbying on.
+
+## Looking Ahead
+
+Phase II pushed me to think more carefully about what "meaningful" data analysis actually means, not just running code but asking whether the outputs actually answer real questions for real users. The 0.565 correlation between spend and meetings is the kind of finding that makes Tintin's user story feel achievable. Phase III is where we get to actually build that.
