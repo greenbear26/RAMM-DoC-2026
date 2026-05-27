@@ -17,6 +17,6 @@ I worked on organizing relational diagrams showing tables such as organizations,
 
 One of my biggest contributions was making the diagram readable and useful for the rest of the team. The relational diagram helped clarify how information would flow through the system and how different pieces of data connected.
 
-<img src="lamb.JPG" style="transform: rotate(0deg); display: block; max-width: 100%;" />
+<img src= "lamb.JPG" style="transform: rotate(0deg); display: block; max-width: 50%;"/>
 
 Outside of the project, my favorite part of the week was visiting Gent. It was my favorite city we have visited so far. We took a boat ride around the city and visited Saint Bavo’s Church, which made the day feel especially memorable. Overall, this phase helped me grow technically while also appreciating the program experience.
