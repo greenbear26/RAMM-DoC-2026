@@ -15,4 +15,4 @@ showAuthorsBadges : false
 
 # Welcome to Team RAMM!
 
-Welcome to tLobbyLens!
+Welcome to LobbyLens!

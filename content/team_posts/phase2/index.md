@@ -1,9 +1,10 @@
-title: "Project – Phase II"
+---
+title: "Project - Phase 2"
 date: 2026-05-27
 draft: false
-description: "Real data, ML models, EDA visualizations, and data architecture"
+description: "Phase 2"
 slug: "phase2post"
-tags: ["project", "data", "ML"]
+tags: ["project", "DataSets"]
 authors:
   - "rishi_ponnapalli"
   - "alyssa_diwale"
@@ -11,10 +12,6 @@ authors:
   - "manav_mahida"
 showAuthorsBadges: false
 ---
-
-
-
-
 
 ## Data Curation and Cleaning
 
@@ -26,6 +23,8 @@ We joined the two datasets on country name, achieving a 97.9% match rate. Before
 
 ### EDA Plot 1 — Distribution of Lobbying Spend
 
+<img src="eda_plot1_lobbying_cost.png" style="transform: rotate(0deg); display: block; max-width: 100%;" />
+
 Our first visualization looked at how lobbying expenditure is distributed across all organizations. We plotted it two ways: raw and log-transformed.
 
 The raw distribution is extremely right-skewed. The vast majority of organizations spend under €50,000 on lobbying while a small handful spend millions — Meta spends €10M, Fleishman-Hillard spends €12.7M. On a normal scale, these outliers make every other organization invisible.
@@ -34,9 +33,21 @@ This finding matters for two reasons. First, it confirms the core story of our a
 
 ### EDA Plot 2 — Lobbying Spend vs EP Meetings
 
+<img src="eda_plot2_spend_vs_meetings.png" style="transform: rotate(0deg); display: block; max-width: 100%;" />
+
 Our second visualization asked the most important question for our entire project: does spending more money actually get you more meetings with Parliament?
 
 The answer is yes and we proved it with the EDA. We found a correlation of 0.565 between lobbying cost and meeting count. That is a moderately strong positive relationship, meaning organizations that spend more do tend to secure more documented parliamentary access. This is not just an interesting finding — it is the empirical foundation for our ML model. If spending predicted nothing, our model would have no basis. The fact that it correlates at 0.565 tells us spending is a meaningful signal worth training on.
+
+### Model Verification
+
+<img src="ml_actual_vs_predicted.png" style="transform: rotate(0deg); display: block; max-width: 100%;" />
+
+<img src="ml_residuals.png" style="transform: rotate(0deg); display: block; max-width: 100%;" />
+
+<img src="ml_correlation_heatmap.png" style="transform: rotate(0deg); display: block; max-width: 100%;" />
+
+We added a few plots to verify that our model was working well and to tune our model parameters. While the plots don't demonstrate that our model is perfect, it demonstrates that the model has room to grow, and we hope to imrpove it over the next few weeks.
 
 ## Machine Learning — Predicting Parliamentary Influence
 
