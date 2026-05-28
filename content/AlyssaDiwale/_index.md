@@ -7,4 +7,4 @@ Hello! I am a rising second year studying Finance with a minor in Data Science. 
 More about me:
 
 Favorite song
-<iframe style="border-radius:12px" src="https://open.spotify.com/track/2bsE8sHNGxofmecroJrxsT?si=6f5e16801efe48a6" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+<iframe style="border-radius:12px" src="https://music.youtube.com/watch?v=DvP-0QuDJuA&si=W12VPUFqttDfSbW6" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
