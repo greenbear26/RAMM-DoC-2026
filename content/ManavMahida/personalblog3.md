@@ -1,22 +1,20 @@
 ---
-title: "Personal Blog 2"
+title: "Personal Blog 3"
 date: 2026-05-18
 draft: false
-description: "Blog for assignment 2 of the project"
-slug: "blog2"
+description: "Blog for assignment 3 of the project"
+slug: "blog3"
 tags: ["authors", "config", "docs"]
 authors:
   - "manav_mahida"
 showAuthorsBadges : true
 ---
 
-# Phase 2 Blog
-During Phase II, I served as the point person for the relational diagrams. My main responsibility was translating our project idea into a clearer database structure by identifying the main entities, their attributes, and how they should relate to one another.
+# Phase 3 Blog
+For Phase III, my responsibilities were on the CS side covering the backend REST API, database schema, and frontend pages. I revised the SQL DDL based on Phase II reviewer feedback, adding CREATE DATABASE IF NOT EXISTS, audit trail columns to every table, expanding the app_user table, and adding ml_model_weights and updated influence_prediction tables to support storing trained model parameters so the model doesn't retrain on every prediction call.
 
-I worked on organizing relational diagrams showing tables such as organizations, countries, policy areas, lobbying activities, expenditure records, meetings, access passes, influence predictions, users, and saved query exports. This helped our team move from a broad concept into a more concrete technical design. I also helped make sure the diagram could be translated into SQL DDL code using primary keys, foreign keys, and appropriate data types.
+I designed and implemented 10 Flask routes across 4 blueprints, grounded in our actual datasets from lobbyfacts and the World Bank. The routes cover searching and filtering organizations, fetching full org profiles with expenditure history, creating, updating, and deleting organizations, retrieving top spenders by lobbying cost, fetching World Bank country indicators including GDP and fossil fuels, saving user preferences, and running ML influence predictions that join lobbyfacts and World Bank features together.
 
-One of my biggest contributions was making the diagram readable and useful for the rest of the team. The relational diagram helped clarify how information would flow through the system and how different pieces of data connected.
+On the frontend I built the Home page with the hero search bar and persona login buttons, the Citizen Home page for Stromae with the policy and country card picker that submits preferences to the API, and the Organization Comparison page for Clouseau with side-by-side spend, policy areas, and ML influence score comparison.
 
-<img src= "lamb.JPG" style="transform: rotate(0deg); display: block; max-width: 50%;"/>
-
-Outside of the project, my favorite part of the week was visiting Gent. It was my favorite city we have visited so far. We took a boat ride around the city and visited Saint Bavo’s Church, which made the day feel especially memorable. Overall, this phase helped me grow technically while also appreciating the program experience.
+Our visit to Eurostat was a highlight of the week. Walking into the institution whose data we have been pulling into our app the entire program made everything feel real. Hearing about how they standardize data submissions across all 27 EU member states gave me a much deeper appreciation for the cleaning decisions we made in Phase II.
