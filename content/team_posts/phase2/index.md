@@ -11,7 +11,6 @@ authors:
   - "mihika_mehta"
   - "manav_mahida"
 showAuthorsBadges: false
-images: [] 
 ---
 
 # Blog Post 2
