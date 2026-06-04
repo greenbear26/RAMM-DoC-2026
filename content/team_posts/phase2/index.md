@@ -53,7 +53,7 @@ The answer is yes and our EDA suggests a positive relationship. We found a corre
 
 <img src="feature_relationships.png" style="transform: rotate(0deg); display: block; max-width: 100%;" />
 
-We added a few plots to verify that our model was working well and to tune our model parameters. While the plots don't demonstrate that our model is perfect, it demonstrates that the model has room to grow, and we hope to imrpove it over the next few weeks.
+We added a few plots to verify that our model was working well and to tune our model parameters. While the plots don't demonstrate that our model is perfect, it demonstrates that the model has room to grow, and we hope to improve it over the next few weeks.
 
 ## Machine Learning — Predicting Parliamentary Influence
 
