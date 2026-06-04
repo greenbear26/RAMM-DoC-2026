@@ -27,27 +27,31 @@ We joined the two datasets on country name, achieving a 97.9% match rate. Before
 
 <img src="eda_plot1_lobbying_cost.png" style="transform: rotate(0deg); display: block; max-width: 100%;" />
 
-Our first visualization looked at how lobbying expenditure is distributed across all organizations. We plotted it two ways: raw and log-transformed.
+Our first visualization is looking at how lobbying expenditure is distributed across all organizations. We plotted it two ways which were raw and log-transformed.
 
-The raw distribution is extremely right-skewed. The vast majority of organizations spend under €50,000 on lobbying while a small handful spend millions — Meta spends €10M, Fleishman-Hillard spends €12.7M. On a normal scale, these outliers make every other organization invisible.
+The raw distribution is very right-skewed. The vast majority of organizations spend under €50,000 on lobbying while a small amount spent millions. Some examples are how Meta spends €10M, Fleishman-Hillard spends €12.7M. All lobbying costs are reported in euros which is provided by LobbyFacts. Also, the x-axis on the raw plot is in scientific notation, the label 1e7 means the values are multiplied by 10,000,000, so 1.2 on the axis represents €12,700,000. So on a normal scale these outliers make every other organization invisible.
 
-This finding matters for two reasons. First, it confirms the core story of our app: lobbying power is not evenly distributed. A tiny number of well-funded organizations dominate access to EU institutions. Second, it tells us technically that we need to use log scale when displaying spending data in the app, and that we need to log-transform the lobbying cost feature before feeding it into our ML model so that extreme values don't distort the predictions.
+The log-transformed plot uses log(x+1), which is also written as log1p. It compresses the scale so that the smaller organizations become visible. Another thing to note is that organizations with zero lobbying cost recorded stay at 0 on the log scale even after transformation, since log(0 + 1) = 0. This accounts for the spike at 0 on the right plot, it shows the organizations with no reported lobbying spend and is not a data error. 
+
+This finding matters because it shows how lobbying power is not evenly distributed. A tiny number of well-funded organizations dominate access to EU institutions. Also, it confirmed to us that we needed to use a log scale when displaying spending data in the app, and that we needed to log-transform the lobbying cost feature before putting it into our ML model so that the extreme values dont distort predictions, which we implemented in our final model.
+
 
 ### EDA Plot 2 — Lobbying Spend vs EP Meetings
 
 <img src="eda_plot2_spend_vs_meetings.png" style="transform: rotate(0deg); display: block; max-width: 100%;" />
 
-Our second visualization asked the most important question for our entire project: does spending more money actually get you more meetings with Parliament?
 
-The answer is yes and we proved it with the EDA. We found a correlation of 0.565 between lobbying cost and meeting count. That is a moderately strong positive relationship, meaning organizations that spend more do tend to secure more documented parliamentary access. This is not just an interesting finding — it is the empirical foundation for our ML model. If spending predicted nothing, our model would have no basis. The fact that it correlates at 0.565 tells us spending is a meaningful signal worth training on.
+Our second visualization asked an important question for our project which was if spending more money actually gets you more meetings. 
+The answer is yes and our EDA suggests a positive relationship. We found a correlation of 0.565 between lobbying cost and meeting count. That is a moderately strong positive relationship, meaning organizations that spend more do tend to secure more documented parliamentary access. This scatter plot only includes organizations with both a recorded lobbying cost and at least one recorded meeting, which is why the spike at log(lobbying cost) = 0 from the distribution plot is no longer visible here. Those zero-cost organizations were filtered out before plotting since they provide no useful signal for the relationship between spending and access. 
+
 
 ### Model Verification
 
-<img src="ml_actual_vs_predicted.png" style="transform: rotate(0deg); display: block; max-width: 100%;" />
+<img src="image copy.png" style="transform: rotate(0deg); display: block; max-width: 100%;" />
 
-<img src="ml_residuals.png" style="transform: rotate(0deg); display: block; max-width: 100%;" />
+<img src="image copy 2.png" style="transform: rotate(0deg); display: block; max-width: 100%;" />
 
-<img src="ml_correlation_heatmap.png" style="transform: rotate(0deg); display: block; max-width: 100%;" />
+<img src="feature_relationships.png" style="transform: rotate(0deg); display: block; max-width: 100%;" />
 
 We added a few plots to verify that our model was working well and to tune our model parameters. While the plots don't demonstrate that our model is perfect, it demonstrates that the model has room to grow, and we hope to imrpove it over the next few weeks.
 
