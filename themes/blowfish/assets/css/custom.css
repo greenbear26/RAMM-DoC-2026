@@ -1,5 +1,5 @@
 body {
-  background-color: #525252 !important;
+  background-color: #accadb9f !important;
 }
 body,
 html,
@@ -13,6 +13,4 @@ aside,
 article,
 section,
 .dark\:bg-neutral-800,
-.dark\:bg-neutral-900\/50 {
-  background-color: #525252 !important;
-}
+.dark\:bg-neutral-900\/50
