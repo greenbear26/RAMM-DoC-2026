@@ -1,5 +1,5 @@
 ---
-title: "Project - Phase I"
+title: "Project Blog"
 date: 2026-05-18
 draft: false
 description: "Our Idea for the project"
