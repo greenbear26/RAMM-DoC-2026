@@ -26,12 +26,16 @@ The main changes we made were fixing a data leakage issue where our StandardScal
 
 We also experimented with lobbying_gdp_ratio and inflation_rate and found out our r-squared went to 0.46(higher) when this was removed but with those values also being part of the World Bank API we need to see how we can still implement lobbying_gdp_ratio and inflation_rate maybe with different machine learning algorithms so going into phase 4 we plan to continue experimenting with different feature combinations and potentially explore other algorithms to see if we can still push the R^2 value higher. 
 
+### Frontend
+
+Our site now has a frontend page that allows usage of the first model. The model weights are stored in the database, and using a route, we are able to predict an output with given inputs. We plan to improve the UI to make it more intuitive and clear, but here is what it looks like right now:
+
+<img src="frontend.png" alt="Frontend Image" style="transform: rotate(0deg); display: block; max-width: 100%;" />
+
 
 ## ML 2 - Predicting Party Parliamentary Presence 
 
 ### What We're Predicting 
-
-Our first visualization is looking at how lobbying expenditure is distributed across all organizations. We plotted it two ways which were raw and log-transformed.
 
 For our second model we shifted from regression to classification. We are predicting whether a European political party is currently in parliament or not. The reason we chose this as our target is that being in parliament is a strong signal of relevance and influence. Parties in parliament have direct legislative power, meaning lobbyists and citizens alike should pay more attention to them. 
 
@@ -57,72 +61,12 @@ We used logistic regression via SGDClassifier with a 70/30 train-test split, pre
 The model achieved an accuracy of 55.2% with an F1-score of 0.54. This is a proof of concept that we plan to continue tuning in Phase 4.
 
 ### Routes
-import logging
-logger = logging.getLogger(__name__)
+# Routes
 
-import streamlit as st
-from modules.nav import SideBarLinks
+## REST API Matrix
 
-st.set_page_config(page_title="REST API Matrix", layout='wide')
+To start planning our REST API, we used the functionality planned for in our wireframes to devise a list of routes needed in our app. Then listed these in this REST API Matrix along with the scenarios in which these routes will be used within the app.
 
-SideBarLinks()
-
-st.markdown("# Routes")
-st.sidebar.header("REST API Matrix")
-
-st.markdown("## REST API Matrix")
-st.write(
-    "To start planning our REST API, we used the functionality planned for in our wireframes "
-    "to devise a list of routes needed in our app. Then listed these in this REST API Matrix "
-    "along with the scenarios in which these routes will be used within the app."
-)
-
-routes = [
-    {
-        "command": "/organizations",
-        "get":     "Clouseau and Stromae want to search and filter organizations by country, interest type, and lobbying cost range.",
-        "post":    "Admin wants to add a new organization to the database with lobbyfacts fields.",
-        "put":     "N/A",
-        "delete":  "N/A",
-    },
-    {
-        "command": "/organizations/{org_id}",
-        "get":     "Clouseau wants to see a full org profile including lobbying spend, EP passes, meetings, expenditure history, and activities.",
-        "post":    "N/A",
-        "put":     "Admin wants to update an existing organization's lobbyfacts data fields.",
-        "delete":  "Admin wants to remove an organization from the database.",
-    },
-    {
-        "command": "/organizations/top-spenders",
-        "get":     "Clouseau wants to see the top N organizations ranked by lobbying cost, optionally filtered by country.",
-        "post":    "N/A",
-        "put":     "N/A",
-        "delete":  "N/A",
-    },
-    {
-        "command": "/country-indicators/{country_name}",
-        "get":     "Clouseau wants to see GDP, fossil fuels, CO2 emissions, and urban population from World Bank data for a given country, plus total lobbying spend from that country.",
-        "post":    "N/A",
-        "put":     "N/A",
-        "delete":  "N/A",
-    },
-    {
-        "command": "/preferences",
-        "get":     "Stromae wants to retrieve their saved policy area and country preferences for their personalized feed.",
-        "post":    "Stromae wants to submit onboarding preferences — selected policy areas and countries.",
-        "put":     "N/A",
-        "delete":  "N/A",
-    },
-    {
-        "command": "/organizations/{org_id}/influence-prediction",
-        "get":     "Clouseau wants to run the ML model to get an influence score for a specific org. Joins lobbyfacts features (lobbying cost, FTE, meetings, EP passes) with World Bank features (GDP, fossil fuels) for the org's country. ✦ Calls ML model.",
-        "post":    "N/A",
-        "put":     "N/A",
-        "delete":  "N/A",
-    },
-]
-
-st.markdown("""
 <style>
   .api-table {
     width: 100%;
@@ -160,36 +104,8 @@ st.markdown("""
     color: #A89F8C;
     font-style: italic;
   }
-  .ml-tag {
-    display: inline-block;
-    background: #2563EB;
-    color: white;
-    font-size: 11px;
-    padding: 2px 6px;
-    border-radius: 4px;
-    margin-top: 4px;
-  }
 </style>
-""", unsafe_allow_html=True)
 
-def cell(text):
-    if text == "N/A":
-        return f'<td><span class="na">N/A</span></td>'
-    return f'<td>{text}</td>'
-
-rows_html = ""
-for r in routes:
-    rows_html += f"""
-    <tr>
-      <td><span class="route-cmd">{r['command']}</span></td>
-      {cell(r['get'])}
-      {cell(r['post'])}
-      {cell(r['put'])}
-      {cell(r['delete'])}
-    </tr>
-    """
-
-st.markdown(f"""
 <table class="api-table">
   <thead>
     <tr>
@@ -201,10 +117,50 @@ st.markdown(f"""
     </tr>
   </thead>
   <tbody>
-    {rows_html}
+    <tr>
+      <td><span class="route-cmd">/organizations</span></td>
+      <td>Clouseau and Stromae want to search and filter organizations by country, interest type, and lobbying cost range.</td>
+      <td>Admin wants to add a new organization to the database with lobbyfacts fields.</td>
+      <td><span class="na">N/A</span></td>
+      <td><span class="na">N/A</span></td>
+    </tr>
+    <tr>
+      <td><span class="route-cmd">/organizations/{org_id}</span></td>
+      <td>Clouseau wants to see a full org profile including lobbying spend, EP passes, meetings, expenditure history, and activities.</td>
+      <td><span class="na">N/A</span></td>
+      <td>Admin wants to update an existing organization's lobbyfacts data fields.</td>
+      <td>Admin wants to remove an organization from the database.</td>
+    </tr>
+    <tr>
+      <td><span class="route-cmd">/organizations/top-spenders</span></td>
+      <td>Clouseau wants to see the top N organizations ranked by lobbying cost, optionally filtered by country.</td>
+      <td><span class="na">N/A</span></td>
+      <td><span class="na">N/A</span></td>
+      <td><span class="na">N/A</span></td>
+    </tr>
+    <tr>
+      <td><span class="route-cmd">/country-indicators/{country_name}</span></td>
+      <td>Clouseau wants to see GDP, fossil fuels, CO2 emissions, and urban population from World Bank data for a given country, plus total lobbying spend from that country.</td>
+      <td><span class="na">N/A</span></td>
+      <td><span class="na">N/A</span></td>
+      <td><span class="na">N/A</span></td>
+    </tr>
+    <tr>
+      <td><span class="route-cmd">/preferences</span></td>
+      <td>Stromae wants to retrieve their saved policy area and country preferences for their personalized feed.</td>
+      <td>Stromae wants to submit onboarding preferences — selected policy areas and countries.</td>
+      <td><span class="na">N/A</span></td>
+      <td><span class="na">N/A</span></td>
+    </tr>
+    <tr>
+      <td><span class="route-cmd">/organizations/{org_id}/influence-prediction</span></td>
+      <td>Clouseau wants to run the ML model to get an influence score for a specific org. Joins lobbyfacts features (lobbying cost, FTE, meetings, EP passes) with World Bank features (GDP, fossil fuels) for the org's country. ✦ Calls ML model.</td>
+      <td><span class="na">N/A</span></td>
+      <td><span class="na">N/A</span></td>
+      <td><span class="na">N/A</span></td>
+    </tr>
   </tbody>
 </table>
-""", unsafe_allow_html=True)
 
 ### Route Syntax Details
 In creating our routes, we considered how to label them to make them most understandable for those working with them. This included labeling routes first by what was being accessed — organizations, country-indicators, and preferences — and then narrowing to more specific info. When specific entries needed to be accessed, such as a specific organization or country, we simply included their identifier in the route (e.g. /organizations/{org_id} or /country-indicators/{country_name}). This differs from the syntax used when filtering multiple entries, such as searching organizations by lobbying cost range or country, which was done using query parameters (e.g. /organizations?country=Belgium&min_cost=1000000). This keeps our routes clean and RESTful — path parameters identify a specific resource, while query parameters filter a collection.
@@ -545,36 +501,56 @@ def get_lobby_prediction():
 
 
 # Figure 1
-st.image("assets/fig1_shaping_eu.png", use_container_width=True)
-st.markdown("*Figure 1 - Shaping EU Policies (Citizen Home)*")
-st.markdown("**Figure 1 Description**")
-st.write("We created this page for the Stromae persona — a curious everyday citizen who wants to understand who is shaping EU policy without being overwhelmed by data. The page presents two card-based selection grids: one for picking policy areas of interest such as AI, Climate & Energy, or Healthcare, and one for picking EU member countries. Selections are tracked in session state and highlighted as the user clicks. When they submit, the choices are sent to the POST /preferences route and saved to the database for their personalized feed.")
-st.markdown("---")
+<img src="fig1_shaping_eu.png" width="100%">
+
+*Figure 1 - Shaping EU Policies (Citizen Home)*
+
+**Figure 1 Description**
+
+We created this page for the Stromae persona — a curious everyday citizen who wants to understand who is shaping EU policy without being overwhelmed by data. The page presents two card-based selection grids: one for picking policy areas of interest such as AI, Climate & Energy, or Healthcare, and one for picking EU member countries. Selections are tracked in session state and highlighted as the user clicks. When they submit, the choices are sent to the POST /preferences route and saved to the database for their personalized feed.
+
+---
 
 # Figure 2
-st.image("assets/fig2_org_comparison.png", use_container_width=True)
-st.markdown("*Figure 2 - Organization Comparison (Researcher Home)*")
-st.markdown("**Figure 2 Description**")
-st.write("This page is built for the Clouseau persona — a political science researcher who wants to compare organizations in depth. The layout uses a main content area with a Score Comparison tab alongside a persistent Saved Comparisons column on the right. Once two organizations are saved and selected, the page renders a side-by-side comparison showing lobbying spend, policy areas, EU meeting counts, EP access passes, and the ML influence score returned by the influence prediction route.")
-st.markdown("---")
+<img src="fig2_org_comparison.png" width="100%">
+
+*Figure 2 - Organization Comparison (Researcher Home)*
+
+**Figure 2 Description**
+
+This page is built for the Clouseau persona — a political science researcher who wants to compare organizations in depth. The layout uses a main content area with a Score Comparison tab alongside a persistent Saved Comparisons column on the right. Once two organizations are saved and selected, the page renders a side-by-side comparison showing lobbying spend, policy areas, EU meeting counts, EP access passes, and the ML influence score returned by the influence prediction route.
+
+---
 
 # Figure 3
-st.image("assets/fig3_add_org_search.png", use_container_width=True)
-st.markdown("*Figure 3 - Add Organization: Search & Save Tab*")
-st.markdown("**Figure 3 Description**")
-st.write("The Add Organization page has two tabs. The Search & Save tab allows the researcher to search existing organizations from our lobbyfacts dataset by filtering on policy area, country, or industry. Results are returned from the GET /organizations route and displayed as a list with a Save button next to each entry. Saved organizations are stored in session state and immediately appear in the Saved Comparisons column on the Organization Comparison page.")
-st.markdown("---")
+<img src="fig3_add_org_search.png" width="100%">
+
+*Figure 3 - Add Organization: Search & Save Tab*
+
+**Figure 3 Description**
+
+The Add Organization page has two tabs. The Search & Save tab allows the researcher to search existing organizations from our lobbyfacts dataset by filtering on policy area, country, or industry. Results are returned from the GET /organizations route and displayed as a list with a Save button next to each entry. Saved organizations are stored in session state and immediately appear in the Saved Comparisons column on the Organization Comparison page.
+
+---
 
 # Figure 4
-st.image("assets/fig4_add_org_create.png", use_container_width=True)
-st.markdown("*Figure 4 - Add Organization: Create New Tab*")
-st.markdown("**Figure 4 Description**")
-st.write("The Create New tab provides a form for adding a brand new organization to the database. Fields map directly to the lobbyfacts dataset columns — organization name, country, lobbying cost, FTE members, EU members, interest represented, and LobbyFacts URL. On submission the form calls POST /organizations, and if successful the new organization is automatically added to the researcher's saved comparison list.")
-st.markdown("---")
+<img src="fig4_add_org_create.png" width="100%">
+
+*Figure 4 - Add Organization: Create New Tab*
+
+**Figure 4 Description**
+
+The Create New tab provides a form for adding a brand new organization to the database. Fields map directly to the lobbyfacts dataset columns — organization name, country, lobbying cost, FTE members, EU members, interest represented, and LobbyFacts URL. On submission the form calls POST /organizations, and if successful the new organization is automatically added to the researcher's saved comparison list.
+
+---
 
 # Figure 5
-st.image("assets/fig5_prediction.png", use_container_width=True)
-st.markdown("*Figure 5 - Lobby Prediction Demo*")
-st.markdown("**Figure 5 Description**")
-st.write("The Lobby Prediction Demo page allows a researcher to manually input lobbying features and call the ML influence prediction endpoint directly. Inputs include lobbying cost, EP passes, Members FTE, country, and interest representation type — all features drawn from our lobbyfacts and World Bank datasets. Clicking Predict calls the influence prediction route, which joins the lobbyfacts features with the most recent World Bank indicators for the selected country and returns a predicted influence score and class.")
-st.markdown("---")
+<img src="fig5_prediction.png" width="100%">
+
+*Figure 5 - Lobby Prediction Demo*
+
+**Figure 5 Description**
+
+The Lobby Prediction Demo page allows a researcher to manually input lobbying features and call the ML influence prediction endpoint directly. Inputs include lobbying cost, EP passes, Members FTE, country, and interest representation type — all features drawn from our lobbyfacts and World Bank datasets. Clicking Predict calls the influence prediction route, which joins the lobbyfacts features with the most recent World Bank indicators for the selected country and returns a predicted influence score and class.
+
+---
