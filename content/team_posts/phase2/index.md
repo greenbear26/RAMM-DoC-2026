@@ -73,32 +73,32 @@ Our model achieved an R² score of 0.41 and an RMSE of approximately 20 meetings
 
 ## ER Diagram
 
-Tintin ER Diagram:
-<img src="erdiagram_tintin.png" style="transform: rotate(0deg); display: block; max-width: 100%;" />
+## Figure 1
+<img src="tintin er diagram (1).png" style="transform: rotate(0deg); display: block; max-width: 100%;" />
 
-Clousaeu ER Diagram:
-<img src="erdiagram_clousaeu.png" style="transform: rotate(0deg); display: block; max-width: 100%;" />
+*Description- Tintin ER Diagram
 
-Stromae ER Diagram:
-<img src="erdiagram_stromae.png" style="transform: rotate(0deg); display: block; max-width: 100%;" />
+## Figure 2
+<img src="clouseau er diagram (1).png" style="transform: rotate(0deg); display: block; max-width: 100%;" />
 
+*Description- Clousaeu ER Diagram
 
-Global ER Diagram:
-<img src="erglobal.png" style="transform: rotate(0deg); display: block; max-width: 100%;" />
+## Figure 3
+<img src="stromae er diagram (1).png" style="transform: rotate(0deg); display: block; max-width: 100%;" />
 
-## Relational Models
+*Description- Stromae ER Diagram
 
-Tintin Relational Model:
-<img src="tintinrelational.png" style="transform: rotate(0deg); display: block; max-width: 100%;" />
+## Figure 4
+<img src="global er diagram.png" style="transform: rotate(0deg); display: block; max-width: 100%;" />
 
-Clousaeu Relational Model:
-<img src="clouseaurelational.png" style="transform: rotate(0deg); display: block; max-width: 100%;" />
+*Description- Global ER Diagram
 
-Stromae Relational Model:
-<img src="stromaerelational.png" style="transform: rotate(0deg); display: block; max-width: 100%;" />
+## Relational 
 
-Global Relational Model:
-<img src="globalrelational.png" style="transform: rotate(0deg); display: block; max-width: 100%;" />
+## Figure 5
+<img src="global relational model.png" style="transform: rotate(0deg); display: block; max-width: 100%;" />
+
+*Description- Global Relational Model
 
 
 ## Wireframes
