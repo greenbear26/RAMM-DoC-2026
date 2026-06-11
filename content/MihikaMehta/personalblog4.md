@@ -1,17 +1,21 @@
 ---
-title: "Phase III – Individual Reflection"
-date: 2026-06-04
+title: "Phase IV – Individual Reflection"
+date: 2026-06-11
 draft: false
-description: "My contributions to Phase III of the RAMM lobbying transparency project"
+description: "My contributions to Phase IV of the RAMM lobbying transparency project"
 authors:
   - "mihika_mehta"
 ---
 
-### My Contributions to Phase 3 
+### My Contributions to Phase 4 
 
-For phase 3 my main contributions were finalizing our first ML model by addressing all of Prof. Gerbers Phase 2 feedback, fixing data leakage, log-transforming features, adding new features, and improving our R^2 from 0.41 to 0.46. I also fixed all the writing issues in our Phase 2 blog post, reviewed our second ML model, and wrote part of the Phase 3 tea blog post. 
+
+On the ML 1 side, I improved the prediction page UI by fixing the predicted value display so it shows the actual number of EP meetings instead of the raw log value, removed the raw JSON input display, and added an interactive scatter plot so researchers can visually compare their organizations against the full dataset. I also built out the Similar Organization feature and connected it to the Organization Comparison page so users can save and compare organizations directly from the prediction page.
+
+For ML 2, I worked on connecting the part prediction model to the lobbying theme of the project by integrating the Integrity Watch MEP meetings dataset, which links lobbying organizations to European Parliament political groups. I also worked on just cleaning up things in the App in general and writing part of the DS side when it came to the team blog post.  
+
 
 
 ### In Belgium! 
 
-Outside of the project I really enjoyed taking a day trip to Ghent which was a really nice city. I also loved visiting Luxembourg which was an amazing experience, especially given how relevant it is to the EU work we have been studying throughout the program.
+On the personal side, my favorite part of Belgium these past few weeks would have to be visiting the chocolate factory and the coal mine! These past 5 weeks in Belgium have honestly been such an amazing experience. I think I have grown so much both technically and in general. Thank you Seamus for being a great TA throughout the whole program! It’s been a great past month!
