@@ -14,11 +14,11 @@ showAuthorsBadges: false
 ---
 ## Blog Post 4
 
-### ML 1 - Predicting EP Meetings
+### ML 1 - Predicting EC Meetings
 
 #### UI and Frontend Improvements
 
-After getting feedback in Phase 3, we went back and fixed some issues with how the prediction page was displaying results. The biggest problem was that the output was just showing a raw number like 0.44 with no label, which isn't going to make sense to anyone who looks at it. We fixed this by updating the label to say “ Predicted EP meetings” and displaying it as a clean metric card alongside lobbying cost and EP passes so users can actually understand what they’re looking at. 
+After getting feedback in Phase 3, we went back and fixed some issues with how the prediction page was displaying results. The biggest problem was that the output was just showing a raw number like 0.44 with no label, which isn't going to make sense to anyone who looks at it. We fixed this by updating the label to say “ Predicted European Commission meetings” and displaying it as a clean metric card alongside lobbying cost and EP passes so users can actually understand what they’re looking at. 
 
 We also got rid of the raw JSON block that was showing up under the prediction result. It was just dumping all the input variables as unformatted JSON on the screen which didn't look good and wasn't useful for the user. We replaced it with a simple caption that summarized the inputs in English.
 
@@ -26,8 +26,7 @@ One thing worth noting is that the country dropdown on the prediction page does
 not currently affect the model output. This is because country is not one of our 
 feature columns — the model uses lobbying cost, EP passes, members FTE, and 
 interest type as inputs. We kept the country field in the UI since it provides 
-useful context, but it is a known limitation of the current model that geographic 
-variation is not captured in the prediction.
+useful context, but it is a known limitation of the current model that geographic variation is not captured in the prediction.
 
 #### Interactive Scatter Plot
 
