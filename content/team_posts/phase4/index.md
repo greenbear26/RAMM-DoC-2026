@@ -42,28 +42,33 @@ One of the main piece of feedback we got for ML 2 was that it felt disconnected 
 
 We also built a new page for the journalist persona called “Which Lobbyists Are Influencing EU Party Groups?” where users can pick an EP party group and see which lobbying organizations have met with them the most based on the Integrity Watch data. This pairs with the Part Parliament Prediction page to give journalists a more complete picture. They can now predict how likely a party is to hold seats, and then see which lobbyists are actively targeting the same party group.   
 
-
-
-
 #### ML 2 
 
-ML 2 is still logistic regression using SGDClassifier, predicting in_parliament as the target. We use ideology features from Populist and Parlfacts including populist scores, far-right, far-left, eurosceptic flags, left-right positioning, and EU stance. We are currently sitting at 55.2% LOO-CV accuracy with an F1-score of 0.54. 
+ML 2 is still logistic regression using SGDClassifier, predicting in_parliament as the target. We use ideology features from Populist and Parlfacts including populist scores, far-right, far-left, eurosceptic flags, left-right positioning, and EU stance. We trained the model using LOO-CV, and the F1 score was 0.6. Here are some images that demonstrate the validity of the model:
 
+<img src="correlation_matrix.png" style="transform: rotate(0deg); display: block; max-width: 100%;" />
 
-Blog post cs 
+This is our correlation matrix for the model, which shows that none of our pfeatures were too strongly correlated.
 
-## The Pitch
+---
+<img src="party_confusion_matrix.png" style="transform: rotate(0deg); display: block; max-width: 100%;" />
+
+This is our confusion matrix. It shows a pretty even split of failures across false positives and false negatives, which further helps to show our model is valid.
+
+## Presentation
+
+### The Pitch
 44% of European citizens say they don't understand how the EU works. Meanwhile, thousands of organizations are spending hundreds of millions of euros every year trying to influence its policies. That information is technically publicly available. But it's scattered across databases, buried in jargon, and hard to access for the average person to find.
 That's why we built LobbyLens. LobbyLens is a web application that allows you to filter and track lobbying activity by policy area and country. It also allows you to see exactly what organizations are spending, predict how many EU Parliament meetings an organization is likely to get, and track how political parties across the EU shape their national governments.
 Information is power, and LobbyLens puts it back in the hands of the people. So join LobbyLens today.
 
-## The Stack
+### The Stack
 LobbyLens is built on three layers running inside Docker. The frontend is a multi-page Streamlit app (web-app) that collects user input and renders data through persona-specific pages. It communicates exclusively through HTTP requests to the Flask REST API (web-api), which handles all business logic, ML predictions, and database queries. The database layer is MySQL (mysql_db), seeded from our lobbyfacts and World Bank CSV datasets. The three containers communicate over a shared Docker network. Streamlit calls Flask at http://web-api:4000, and Flask connects to MySQL using environment variables for credentials.
-## The DB
+### The DB
 The schema started in Phase II as a rough outline and evolved significantly through Phase III. Early versions had foreign key errors and a hardcoded org_id that broke POST routes; we fixed this by switching to AUTO_INCREMENT and expanding country_code to VARCHAR(100) to handle full country names from our dataset. The final schema centers on lobbying_organization as the core entity, with lookup tables for country_indicator, industry, and app_user, and four standalone ML parameter tables storing trained beta values and scalers for both the lobby influence and party prediction models. The party_info and party_to_lobby_info tables support the political party side of the app, linking Parlfacts party data to lobbying organizations.
-## Deployment
+### Deployment
 The entire app runs in Docker Compose with three containers — web-app, web-api, and mysql_db. Cloning the repo, creating a .env file with database credentials, and running docker compose up --build spins everything up. The database initializes from 01-ddl.sql and 02-inserts.sql automatically on first build. A one-time data load command populates the lobbying_organization table from the CSV. No manual code edits or specialized knowledge of the data model are needed to get the app running.
-## Frontend
+### Frontend
 We designed a frontend layer for three distinct user personas: a European Citizen, an Investigative Journalist, and a Political Science Researcher. Each persona has their own dedicated home page and set of pages tailored to their use case.
 The European Citizen persona (Stromae) is built around discoverability; their home page features an interactive card picker where they can select policy areas and countries they care about, which submits their preferences to the API and surfaces relevant lobbying organizations influencing those policies. The Political Science Researcher persona (Jacques Clouseau) is built around comparison and analysis; they get a full Organization Comparison page where they can search for organizations, save them, and compare two side by side with lobbying spend, policy areas, and ML influence scores. The Investigative Journalist persona is focused on NGO deep-dives, with filtering and profile pages for exploring specific organizations and their activity history.
 Across all personas, the frontend supports searching and filtering by organization name, policy area, and country, saving organizations to a session-based list, and running ML predictions directly from the UI. Each persona page communicates exclusively with the Flask REST API. There is no direct database access from the frontend.
